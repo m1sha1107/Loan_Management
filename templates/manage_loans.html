@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Loans</title>
+    <link href='https://fonts.googleapis.com/css?family=Poiret One' rel='stylesheet'>
+    <style>
+        body {
+            font-family: 'Poiret One', sans-serif;
+            margin: 20px;
+            background-color: #000;
+        }
+
+        h1 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            margin-bottom: 10px;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        input {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 15px;
+            background-color: black;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        button:hover {
+            background-color: #fff;
+            color: #000;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
+
+        th {
+            background-color: #000;
+            color: #fff;
+        }
+
+        td {
+            background-color: #fff;
+            color: #000;
+        }
+
+        tr:hover td {
+            background-color: #ffff;
+        }
+
+        td form {
+            display: inline;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        p a {
+            color: #fff;
+            background-color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+            padding: 8px 16px;
+            border-radius: 4px;
+        }
+
+        p a:hover {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Manage Loans</h1>
+    
+    <form action="{{ url_for('add_loan') }}" method="POST">
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" required>
+        <label for="customer">Customer:</label>
+        <input type="text" id="customer" name="customer" required>
+        <button type="submit">Add Loan</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Amount</th>
+                <th>Customer</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for loan in loans %}
+            <tr>
+                <td>{{ loan[0] }}</td>
+                <td>{{ loan[1] }}</td>
+                <td>{{ loan[2] }}</td>
+                <td>
+                    <form action="{{ url_for('delete_loan', loan_id=loan[0]) }}" method="POST" style="display:inline;">
+                        <input type="hidden" name="amount" value="{{ loan[1] }}">
+                        <input type="hidden" name="customer" value="{{ loan[2] }}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p><a href="{{ url_for('index') }}">Back to Home</a></p>
+</body>
+</html>

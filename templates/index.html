@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href='https://fonts.googleapis.com/css?family=Poiret One' rel='stylesheet'>
+    <style>
+        /* CSS for the Home Page */
+        body {
+            font-family: 'Poiret One', sans-serif;
+            font-size: 22px;
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 10px 20px;
+            border-radius: 4px;
+            background-color: rgba(0, 0, 0, 0);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        a:hover {
+            background-color: #fff;
+            color: #000;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 30px;
+            background-color: rgba(0, 0, 0, 0);
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+        p a {
+            color: #ffffff;
+        }
+
+        p a:hover {
+            text-decoration: underline;
+        }
+
+        /* Flash messages styling */
+        div.alert {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        div.alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        div.alert-error {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Loan Management System</h1>
+    <ul>
+        <li><a href="{{ url_for('manage_loans') }}">Manage Loans</a></li>
+        <li><a href="{{ url_for('manage_users') }}">Manage Users</a></li>
+        <li><a href="{{ url_for('manage_borrowers') }}">Manage Borrowers</a></li>
+    </ul>
+    <p><a href="{{ url_for('logout') }}">Logout</a></p>
+</body>
+</html>
